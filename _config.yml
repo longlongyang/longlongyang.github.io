@@ -1,3 +1,10 @@
 theme: jekyll-theme-midnight
 title: Longlong's homepage
 description: Some interesting stuff I would like to share
+timezone: Asia/Shanghai
+author:
+  name: "longlong"
+  email: "longlong.yang@intel.com"
+  url: "https://cryp.ren/"
+owner : "longlong"
+year : "2022"
