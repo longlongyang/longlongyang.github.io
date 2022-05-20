@@ -1,7 +1,6 @@
-//! This crate is just a minimal example to show how to use
-//! $\LaTeX$ expressions inside rust documentation.
-//!
-//! See the readme in the [repo](https://github.com/victe/rust-latex-doc-minimal-example) for more information.
+//! My Blog
+//! 
+//! Utilize rustdoc with $\LaTeX$ expressions as blogging.
 //!
 //! Example inline with text $E = mc^2$.
 //! Example in separate line:

@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["hello_world","Hello world"]]});
+initSidebarItems({"mod":[["hello_world","Hello world - my first blog"]]});
