@@ -1,0 +1,2 @@
+This is a new paragragh named introduction. It usually is put on the begining of a article to give a whole picture of the content of the entire article.  
+And here acts as a kind of POC to prove utilizing the rustdoc and github page to write blog is a *cool* thing that can happen! It works!
