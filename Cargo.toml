@@ -1,16 +1,6 @@
-[package]
-name = "blog"
-version = "0.1.0"
-authors = ["longlongyang <longlong.yang@intel.com>"]
-edition = "2018"
-description = "rust latex doc as blog"
-homepage = "http://cryp.ren"
+[workspace]
 
-license = "CC0-1.0"
-categories = ["development-tools", "mathematics", "science"]
-keywords = ["latex", "rustdoc", "docs"]
-
-[dependencies]
-
-[package.metadata.docs.rs]
-rustdoc-args = [ "--html-in-header", "./src/docs-header.html" ]
+members = [
+    "blog",
+    "rearrange_tool"
+]

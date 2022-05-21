@@ -1,2 +1,2 @@
 [build]
-rustdocflags = [ "--default-theme", "ayu", "--extend-css", "./src/ayu.css", "--html-in-header", "./src/docs-header.html" ]
+rustdocflags = [ "--default-theme", "ayu", "--extend-css", "./blog/src/ayu.css", "--html-in-header", "./blog/src/docs-header.html" ]
