@@ -10,49 +10,62 @@ fn main() {
     let main_js = main_js.replace("Modules", "Posts");
     fs::write(Path::new("docs").join("main.js"), main_js).expect("Can't write to main.js.");
 
-    let docs_scan_path = Path::new("docs\\blog");
+    let nav = fs::read_dir(Path::new("docs"))
+        .unwrap()
+        .filter(|entry| entry.is_ok())
+        .filter(|entry| entry.as_ref().unwrap().path().is_dir())
+        .map(|e| e.unwrap().path().to_str().unwrap().to_owned())
+        .collect::<Vec<String>>();
 
-    let index =
-        fs::read_to_string(docs_scan_path.join("index.html")).expect("Unable to read index.html.");
+    for path in nav {
+        let docs_scan_path = Path::new(&path);
 
-    let index = index.replace("blog - Rust", "Cryp.ren");
-    let index = index.replace("Crate", "Navigation");
-    let index = index.replace("Crates", "Navigation");
-    let index = index.replace("Modules", "Posts");
+        let index = fs::read_to_string(docs_scan_path.join("index.html"));
 
-    fs::write(docs_scan_path.join("index.html"), index).expect("Can't write to index.html.");
+        if index.is_ok() {
+            let index = index.unwrap().replace("blog - Rust", "Cryp.ren");
+            let index = index.replace("Crate", "Navigation");
+            let index = index.replace("Crates", "Navigation");
+            let index = index.replace("Modules", "Posts");
 
-    let all =
-        fs::read_to_string(docs_scan_path.join("all.html")).expect("Unable to read all.html.");
+            fs::write(docs_scan_path.join("index.html"), index)
+                .expect("Can't write to index.html.");
+        }
 
-    let all = all.replace("Crate", "Navigation");
-    let all = all.replace("Constants", "Sections");
+        let all = fs::read_to_string(docs_scan_path.join("all.html"));
 
-    fs::write(docs_scan_path.join("all.html"), all).expect("Can't write to all.html.");
+        if all.is_ok() {
+            let all = all.unwrap().replace("Crate", "Navigation");
+            let all = all.replace("Constants", "Sections");
 
-    // every post
-    for html_entry in docs_scan_path
-        .read_dir()
-        .expect("read html dir call failed")
-    {
-        if let Ok(html_entry) = html_entry {
-            if html_entry.path().join("index.html").exists() {
-                for single_html_entry in html_entry
-                    .path()
-                    .read_dir()
-                    .expect("read single file call failed")
-                {
-                    if let Ok(single_html_entry) = single_html_entry {
-                        if single_html_entry.path().extension().unwrap() == "html" {
-                            let html_entry_single = single_html_entry.path();
-                            let content = fs::read_to_string(html_entry_single.clone())
-                                .expect("Unable to read file.");
+            fs::write(docs_scan_path.join("all.html"), all).expect("Can't write to all.html.");
+        }
 
-                            let content = content.replace("Module", "Post");
-                            let content = content.replace("Constant", "Section");
-                            let content = content.replace("Constants", "Sections");
+        // every post
+        for html_entry in docs_scan_path
+            .read_dir()
+            .expect("read html dir call failed")
+        {
+            if let Ok(html_entry) = html_entry {
+                if html_entry.path().join("index.html").exists() {
+                    for single_html_entry in html_entry
+                        .path()
+                        .read_dir()
+                        .expect("read single file call failed")
+                    {
+                        if let Ok(single_html_entry) = single_html_entry {
+                            if single_html_entry.path().extension().unwrap() == "html" {
+                                let html_entry_single = single_html_entry.path();
+                                let content = fs::read_to_string(html_entry_single.clone())
+                                    .expect("Unable to read file.");
 
-                            fs::write(html_entry_single, content).expect("Can't write to file.");
+                                let content = content.replace("Module", "Post");
+                                let content = content.replace("Constant", "Section");
+                                let content = content.replace("Constants", "Sections");
+
+                                fs::write(html_entry_single, content)
+                                    .expect("Can't write to file.");
+                            }
                         }
                     }
                 }

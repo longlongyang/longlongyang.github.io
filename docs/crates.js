@@ -1,1 +1,1 @@
-window.ALL_CRATES = ["blog"];
+window.ALL_CRATES = ["about","blog"];

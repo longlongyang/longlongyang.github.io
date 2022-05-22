@@ -2,6 +2,7 @@
 
 members = [
     "blog",
+    "about",
     "rearrange_tool",
     "semantics_tool"
 ]
