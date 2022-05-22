@@ -35,8 +35,6 @@ fn main() {
                             let content = fs::read_to_string(html_entry_index.clone())
                                 .expect("Unable to read file.");
 
-                            println!("Found a target({:?}) to rearrange sections...", html_entry_index.clone());
-
                             let content = content.replace("\n", "");
 
                             let div_re =
@@ -45,22 +43,19 @@ fn main() {
                                 div_re.find_iter(&content).map(|m| m.as_str()).collect();
                             let mut div_left: Vec<&str> = div_re.split(&content).collect();
                             div_left.reverse();
-                            
+
                             // reconstruct the content
                             let mut new_content = div_left.pop().unwrap().to_owned();
                             for cstr in const_str.clone().into_iter() {
-                                println!("Finding {:?} section...", cstr);
                                 for dstr in div_str.clone().into_iter() {
                                     let mut target_str = "::".to_owned();
                                     target_str.push_str(cstr);
                                     if dstr.contains(&target_str) {
-                                        println!("Found {:?} section!", cstr);
                                         new_content.push_str(dstr);
                                         break;
                                     }
                                 }
                             }
-                            println!("Done! Resembling...");
                             fs::write(html_entry_index, new_content).expect("Can't write to file.");
                         }
                     }

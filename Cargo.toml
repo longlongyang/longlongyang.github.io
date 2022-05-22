@@ -2,5 +2,6 @@
 
 members = [
     "blog",
-    "rearrange_tool"
+    "rearrange_tool",
+    "semantics_tool"
 ]
