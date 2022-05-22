@@ -1,6 +1,6 @@
 @echo off
 cargo clean
-rmdir /q /s docs
+IF exist docs ( rmdir /q /s docs )
 cargo doc -p blog -q
 xcopy /e /y /q target\doc\* .\docs\
 xcopy /e /y /q patch\* .\docs\
