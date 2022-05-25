@@ -1,5 +1,5 @@
 //! Hello world - my first blog
-
+#![allow(nonstandard_style)]
 #[doc = include_str!("./md/hello_world/hello_world_intro.md")]
 pub const Introduction: u8 = 0;
 
